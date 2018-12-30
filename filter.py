@@ -1,9 +1,11 @@
-#EAAAAAYsX7TsBAIoHmZCYhDZBqCZCPRHJWNsoEL4Qzvf1QZCv5mErBzHlvdJhO5o4YORqlyiZBfcp3nP3c0ERt3WGDLfImTZB7kj9UK52oKwMS7SxuP12WUUdGyBI2v1AdV9ZCWrJ56FKKQEscRx5EFIHhuMWfBGGc4UqIoGVCVK3llL39YvSVZCNfVkCM6Ed0dycpv4dTlZCM798U64ZBKCenC
 import requests
+import time
+delay_time = 1
 info = {}
 tk = ''
 die_count = 0
 rank_count = 0
+
 #check avaiable user
 def delete_uid(uid):
 	r = requests.get('https://graph.facebook.com/me/friends/'+uid+'?access_token='+tk+'&method=DELETE')
@@ -44,6 +46,7 @@ def friend_rank():
 	data  = r.json()
 	print('QUET THANH CONG DANG TIEN HANH XU LY')
 	for res in data['data'][0]['fql_result_set']:
+		time.sleep(delay_time)
 		if (die.upper() == 'Y'):	
 			
 			if user_check(res['uid2']):
@@ -73,15 +76,14 @@ else:
 	if check_token(tk):
 		limit = input('Gioi han quet : ')
 		rank_delete = raw_input('Xoa nguoi ko tuong tac(Y/N):  ')
-		avatar = raw_input('Xoa nguoi khong co avatar (Y/N): ')
-		die = raw_input('Xoa nick die, checkpoint: (Y/N): ')
-		mutual_friend = int(input('Ban be nho hon:  '))
-		gender = raw_input('Xoa nguoi co gioi tinh (0 = khong xoa, 1 = xoa nam, 2 = xoa nu, 3: xoa het): ')
-		
+		# avatar = raw_input('Xoa nguoi khong co avatar (Y/N): ')
+		# die = raw_input('Xoa nick die, checkpoint: (Y/N): ')
+		# mutual_friend = int(input('Ban be nho hon:  '))
+		# gender = raw_input('Xoa nguoi co gioi tinh (0 = khong xoa, 1 = xoa nam, 2 = xoa nu, 3: xoa het): ')
+		delay_time = int(input('>> Khoang cach moi lan xoa (s): '))
 
 		friend_rank()
 	else:
 		print('access_token error')
-
 
 
